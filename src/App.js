@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Switch from "./components/Switch";
+import Header from "./components/header/Header";
+import { useState } from "react";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faShuttleSpace } from "@fortawesome/free-solid-svg-icons";
+library.add(faShuttleSpace);
 
 function App() {
+  const [switch1, setSwitch1] = useState(false);
+  const [switch2, setSwitch2] = useState(false);
+  const [switch3, setSwitch3] = useState(false);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <Header />
+      <div className="container ">
+        <div className="switchs">
+          <Switch switchButton={switch1} setSwitch={setSwitch1} />
+          <Switch switchButton={switch2} setSwitch={setSwitch2} />
+          <Switch switchButton={switch3} setSwitch={setSwitch3} />
+        </div>
+
+        <div
+          className={`ready ${switch1 && switch2 && switch3 ? "go" : "no-way"}`}
         >
-          Learn React
-        </a>
-      </header>
+          {switch1 && switch2 && switch3 ? "Go!" : "No way"}
+        </div>
+      </div>
     </div>
   );
 }
